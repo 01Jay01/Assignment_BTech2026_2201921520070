@@ -1,0 +1,37 @@
+class MyCalendarTwo {
+    private List<int[]> bookings;
+    public MyCalendarTwo() {
+        bookings=new ArrayList<>();
+    }
+    
+    public boolean book(int startTime, int endTime) {
+        for (int[] interval : bookings) {
+            int a = interval[0], b = interval[1];
+            if (startTime < b && endTime > a) {
+                int newStart = Math.max(a, startTime);
+                int newEnd = Math.min(b, endTime);
+                if (check(newStart, newEnd)) {
+                    return false;  
+                }
+            }
+        }
+        bookings.add(new int[] {startTime, endTime});
+        return true;  
+    }
+    private boolean check(int start, int end) {
+        int overlapCount = 0;
+
+        for (int[] interval : bookings) {
+            int a = interval[0], b = interval[1];
+            if (start < b && end > a) {
+                overlapCount++;
+                if (overlapCount == 2) {
+                    return true;  
+                }
+            }
+        }
+
+        return false;
+    }
+    
+}
