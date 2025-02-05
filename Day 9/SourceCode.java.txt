@@ -1,0 +1,36 @@
+class MyCalendar {
+    List<int[]> list;
+    public MyCalendar() {
+        list=new ArrayList<>();
+    }
+    
+    public boolean book(int startTime, int endTime) {
+        for (int[] interval : list) {
+            int a = interval[0], b = interval[1];
+            if (startTime < b && endTime > a) {
+                int newStart = Math.max(a, startTime);
+                int newEnd = Math.min(b, endTime);
+                if (check(newStart, newEnd)) {
+                    return false;  
+                }
+            }
+        }
+        list.add(new int[] {startTime, endTime});
+        return true;  
+    }
+    public boolean check(int start, int end){
+        int overlapCount = 0;
+
+        for (int[] interval : list) {
+            int a = interval[0], b = interval[1];
+            if (start < b && end > a) {
+                overlapCount++;
+                if (overlapCount == 1) {
+                    return true;  
+                }
+            }
+        }
+
+        return false;
+    }
+}
