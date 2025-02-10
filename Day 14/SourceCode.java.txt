@@ -1,0 +1,23 @@
+class SubrectangleQueries {
+    int[][] arr;
+    int n1;
+    int n2;
+    public SubrectangleQueries(int[][] rectangle) {
+        arr=rectangle;
+        n1=rectangle.length;
+        n2=rectangle[0].length;
+    }
+    
+    public void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) {
+        int i,j;
+        for(i=row1;i<=row2;i++){
+            for(j=col1;j<=col2;j++){
+                arr[i][j]=newValue;
+            }
+        }
+    }
+    
+    public int getValue(int row, int col) {
+        return arr[row][col];
+    }
+}
